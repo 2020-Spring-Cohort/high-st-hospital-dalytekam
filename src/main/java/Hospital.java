@@ -1,5 +1,5 @@
 import java.util.HashMap;
-import java.util.List;
+
 import java.util.Map;
 
 public class Hospital {
@@ -32,14 +32,17 @@ public class Hospital {
 
 
     public Map<String, Employee> getEmployeesList() {
+
         return employeesList;
     }
 
     public Map<String, Patient> getPatientsList() {
+
         return patientsList;
     }
 
     public int getCleanliness() {
+
         return cleanliness;
     }
 
@@ -55,16 +58,15 @@ public class Hospital {
 
     public void hireEmployee(Employee employeeToHire){
         getEmployeesList().put(employeeToHire.getEmployeeName(),employeeToHire);
+        System.out.println(employeeToHire.getEmployeeName()+" has been hired");
 
     }
     public void fireEmployee(String employeeNameToFire){
-        for(Map.Entry<String,Employee> emp: getEmployeesList().entrySet()){
-            if(emp.getKey().equalsIgnoreCase(employeeNameToFire)){
-                getEmployeesList().remove(emp);
-            } else{
-                System.out.println(employeeNameToFire+ "is not part of our Staff");
-            }
-
+        if(getEmployeesList().containsKey(employeeNameToFire)){
+            getEmployeesList().remove(employeeNameToFire);
+            System.out.println(employeeNameToFire+" has been fired");
+        }else{
+            System.out.println(employeeNameToFire+" has never worked here");
         }
 
     }
@@ -75,16 +77,14 @@ public class Hospital {
 
     }
     public void searchForAnEmployee(String employeeNameToSearch){
-        for(Map.Entry<String,Employee> emp: getEmployeesList().entrySet()){
-            if(emp.getKey().equalsIgnoreCase(employeeNameToSearch)){
-                System.out.println(employeeNameToSearch+ "is an employee here");
-            } else{
-                System.out.println(employeeNameToSearch+ "is not part of our Staff");
-            }
-
+        if(getEmployeesList().containsKey(employeeNameToSearch)){
+            System.out.println(employeeNameToSearch+ " is an employee here");
         }
-
+            else{
+                System.out.println(employeeNameToSearch+ " is not part of our Staff");
+            }
     }
+
     public void payBills(double amountToPay){
         setBillAmount(getBillAmount()-amountToPay);
 
@@ -93,4 +93,32 @@ public class Hospital {
         getPatientsList().put(patientToAdmit.getPatientName(),patientToAdmit);
 
     }
+    public void displayAllEmployees(){
+        for(Map.Entry<String, Employee> emp : getEmployeesList().entrySet()){
+            System.out.println("-------------------");
+            System.out.println("Employee ID: " +emp.getValue().getEmployeeNumber());
+            System.out.println("Employee Name: " +emp.getValue().getEmployeeName());
+            System.out.println("Profession :"+emp.getValue().getClass().getSimpleName());
+            System.out.println("Salary: "+emp.getValue().getEmployeeSalary());
+            if(emp.getValue().getClass().getSimpleName().equalsIgnoreCase("Doctor")) {
+            System.out.println("Specialty :"+((Doctor) emp.getValue()).getSpecialty());
+}
+
+            if(emp.getValue().getClass().getSimpleName().equalsIgnoreCase("Nurse")) {
+                System.out.println("Number of Patients :"+((Nurse) emp.getValue()).getNumberOfPatients());
+            }
+        }
+
+    }
+    public void displayAllPatients(){
+        for(Map.Entry<String, Patient> patient : getPatientsList().entrySet()){
+            System.out.println("-------------------");
+            System.out.println("Patient ID: " +patient.getValue().getPatientID());
+            System.out.println("Patient Name: " +patient.getValue().getPatientName());
+            System.out.println("Blood Level :"+patient.getValue().getBloodLevel());
+            System.out.println("Health Level: "+patient.getValue().getHealthLevel());
+        }
+
+    }
+
 }

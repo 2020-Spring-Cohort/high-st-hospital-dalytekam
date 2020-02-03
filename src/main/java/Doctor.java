@@ -12,7 +12,8 @@ public class Doctor extends Employee implements CanDrawBloodAndCare{
 
     @Override
     public void paidSalary(Salary s) {
-this.employeeSalary+= s.doctorSalary;
+
+        this.employeeSalary+= s.doctorSalary;
     }
 
 

@@ -2,7 +2,8 @@ import java.util.Map;
 
 public class HospitalApplication {
     public static void main(String[] args) {
-        // initializing the App( Create Doctors, Nurses, Janitor, Patient, ect ...)
+
+        // initializing the App( Create and hire Doctors, Nurses, Janitor, Patient, ect ...)
 
         Doctor doc1 = new Doctor(100,"Dan","Cardiolog");
         Doctor doc2 = new Doctor(101,"John","Surgeon");
@@ -21,11 +22,13 @@ public class HospitalApplication {
         hospital.hireEmployee(doc1);
         hospital.hireEmployee(doc2);
         hospital.hireEmployee(nur1);
+        hospital.hireEmployee(nur2);
         hospital.hireEmployee(jan);
         hospital.hireEmployee(rec);
         hospital.hireEmployee(ed);
         hospital.admitAPatient(pat1);
         hospital.admitAPatient(pat2);
+
         // Pay salary
         hospital.payAllEmployees(salary);
         System.out.println("All Employees has been paid");
@@ -65,5 +68,55 @@ public class HospitalApplication {
         rec.provideInformationToGuests(hospital);
         System.out.println("");
         System.out.println("hospital number of guests is "+ hospital.getNumberOfGuests()+" after the receptionist has provided information to Guests");
+        System.out.println("");
+        // Search for Dan
+        hospital.searchForAnEmployee("Dan");
+// Search for liu which is not a part of the staff
+        hospital.searchForAnEmployee("Liu");
+        System.out.println("");
+        // Display all Employees
+        hospital.displayAllEmployees();
+        System.out.println("");
+        // Fire Doctor dan
+
+        hospital.fireEmployee("Dan");
+
+        // Fire someone who doesn't exist
+        hospital.fireEmployee("Ryu");
+        // Pay bills
+        System.out.println("Bill amount before payement: "+ hospital.getBillAmount());
+        hospital.payBills(25000);
+        System.out.println("");
+        System.out.println("Bill amount after payement of 25 000: "+hospital.getBillAmount() );
+
+   // Display all employees
+        hospital.displayAllEmployees();
+
+        System.out.println("");
+
+        //Display all Patients
+
+        hospital.displayAllPatients();
+
+        System.out.println("");
+
+        // Receptionist has a Call
+
+        rec.haveACall();
+        System.out.println(" ");
+        System.out.println("The receptionist "+ rec.getEmployeeName()+ " has a Call");
+        System.out.println(rec.getEmployeeName()+" call status :"+rec.isOnCall());
+
+        // Emergency dispatcher draw blood
+        System.out.println(pat1.getPatientName()+" blood level is "+pat1.getBloodLevel()+" before blood drawing");
+        System.out.println(" ");
+        ed.drawBlood(pat1);
+        System.out.println(pat1.getPatientName()+" blood level is "+pat1.getBloodLevel()+" after blood drawing by the  Emergency Dispatcher");
+        System.out.println(" ");
+        System.out.println(pat1.getPatientName()+ " Health Level is "+ pat1.getHealthLevel()+" before the Emergency dispatcher care" );
+        ed.careForPatient(pat1);
+        System.out.println(" ");
+        System.out.println(pat1.getPatientName()+ " Health Level is "+ pat1.getHealthLevel()+" after the Emergency dispatcher care" );
+
     }
 }
