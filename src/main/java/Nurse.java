@@ -11,6 +11,7 @@ public class Nurse extends Employee implements ITick, CanDrawBloodAndCare{
     @Override
     public void paidSalary(Salary s) {
         this.employeeSalary+= s.nurseSalary;
+        this.hasBeenPaid=true;
     }
 
     @Override
@@ -25,11 +26,16 @@ public class Nurse extends Employee implements ITick, CanDrawBloodAndCare{
 
     @Override
     public void drawBlood(Patient p) {
-p.setBloodLevel(p.getBloodLevel()-2);
+
+        p.setBloodLevel(p.getBloodLevel()-2);
+        System.out.println(getEmployeeName()+ " has performed the blood drawing on \n"+ p.getPatientName()+" with success");
+
     }
 
     @Override
     public void careForPatient(Patient p) {
 p.setHealthLevel(p.getHealthLevel()+2);
+        System.out.println(getEmployeeName()+ " has treated \n"+ p.getPatientName()+" with success");
+
     }
 }
