@@ -1,4 +1,4 @@
-public class Patient {
+public class Patient implements ITick{
    private int patientID;
    private String patientName;
     private int bloodLevel = 20;
@@ -7,7 +7,7 @@ public class Patient {
 
     public Patient(int patientID, String patientName) {
         this.patientID = patientID;
-        this.patientName = patientName;
+        this.patientName = patientName.toUpperCase();
 
     }
 
@@ -36,5 +36,11 @@ public class Patient {
 
     public void setHealthLevel(int healthLevel) {
         this.healthLevel = healthLevel;
+    }
+
+    @Override
+    public void tick() {
+        setHealthLevel(this.getHealthLevel()-1);
+
     }
 }

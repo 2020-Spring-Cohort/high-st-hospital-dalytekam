@@ -18,7 +18,7 @@ public class HospitalApplication {
         Receptionist rec = new Receptionist(400,"Mike");
         Patient pat1 = new Patient(500,"Nash");
         Patient pat2 = new Patient(501,"Jolene");
-        Hospital hospital = new Hospital(20,20,36000.00);
+        Hospital hospital = new Hospital(20,3,36000.00);
         EmergencyDispatcher ed = new EmergencyDispatcher(600,"Tina");
 
         Salary salary = new Salary();
@@ -33,7 +33,7 @@ public class HospitalApplication {
         hospital.hireEmployee(ed);
         hospital.admitAPatient(pat1);
         hospital.admitAPatient(pat2);
-
+        System.out.println(" ");
         while(quitApp.equals("0")){
 
             menu();
@@ -50,7 +50,7 @@ public class HospitalApplication {
         System.out.print("[5] Hire a new Emergency Dispatcher");
         System.out.println("           [6] Admit a new Patient");
         System.out.print("[7] Fire an Employee");
-        System.out.println("                          [8] Clean the Hospital");
+        System.out.println("                          [8] Have someone to clean the Hospital");
         System.out.print("[9] Have someone perform blood drawing");
         System.out.println("        [10] Have someone care for a Patient");
         System.out.print("[11] Provide information to guests");
@@ -75,9 +75,17 @@ public class HospitalApplication {
                   int iDOfDoctorToHire = input.nextInt();
                   input.nextLine();
                   System.out.println("Enter the Name of the Doctor You want to hire");
-                  String nameOfDoctorToHire = input.nextLine();
+                  String nameOfDoctorToHire = input.nextLine().toUpperCase().trim();
+                  for(Map.Entry<String,Employee> e: hospital.getEmployeesList().entrySet()){
+                      while(e.getValue().getEmployeeName().equals(nameOfDoctorToHire)){
+                          System.out.println("This Name is already used by another Employee");
+                          System.out.println("Enter the Name of the Doctor You want to hire");
+                          nameOfDoctorToHire = input.nextLine().toUpperCase().trim();
+                      }
+
+                  }
                   System.out.println("What is the Specialty of the Doctor?");
-                  String specialtyOfDoctorToHire = input.nextLine();
+                  String specialtyOfDoctorToHire = input.nextLine().trim();
                   hospital.hireEmployee(new Doctor(iDOfDoctorToHire,nameOfDoctorToHire,specialtyOfDoctorToHire));
                   break;
               case "2":
@@ -85,7 +93,16 @@ public class HospitalApplication {
                   int iDOfNurseToHire = input.nextInt();
                   input.nextLine();
                   System.out.println("Enter the Name of the Nurse You want to hire");
-                  String nameOfNurseToHire = input.nextLine();
+                  String nameOfNurseToHire = input.nextLine().toUpperCase().trim();
+                  for(Map.Entry<String,Employee> e: hospital.getEmployeesList().entrySet()){
+                      while(e.getValue().getEmployeeName().equals(nameOfNurseToHire)){
+                          System.out.println("This Name is already used by another Employee");
+                          System.out.println("Enter the Name of the Nurse You want to hire");
+                          nameOfNurseToHire = input.nextLine().toUpperCase().trim();
+                      }
+
+                  }
+
                   System.out.println("How many Patients will be assign to Her/Him");
                   int numberOfPatientsToAssign = input.nextInt();
                   input.nextLine();
@@ -96,7 +113,16 @@ public class HospitalApplication {
                   int iDOfJanitorToHire = input.nextInt();
                   input.nextLine();
                   System.out.println("Enter the Name of the Janitor You want to hire");
-                  String nameOfJanitorToHire = input.nextLine();
+                  String nameOfJanitorToHire = input.nextLine().toUpperCase().trim();
+                  for(Map.Entry<String,Employee> e: hospital.getEmployeesList().entrySet()){
+                      while(e.getValue().getEmployeeName().equals(nameOfJanitorToHire)){
+                          System.out.println("This Name is already used by another Employee");
+                          System.out.println("Enter the Name of the Janitor You want to hire");
+                          nameOfJanitorToHire = input.nextLine().toUpperCase().trim();
+                      }
+
+                  }
+
                   hospital.hireEmployee(new Janitor(iDOfJanitorToHire,nameOfJanitorToHire));
                   break;
               case "4":
@@ -104,7 +130,16 @@ public class HospitalApplication {
                   int iDOfReceptionistToHire = input.nextInt();
                   input.nextLine();
                   System.out.println("Enter the Name of the Receptionist You want to hire");
-                  String nameOfReceptionistToHire = input.nextLine();
+                  String nameOfReceptionistToHire = input.nextLine().toUpperCase().trim();
+
+                  for(Map.Entry<String,Employee> e: hospital.getEmployeesList().entrySet()){
+                      while(e.getValue().getEmployeeName().equals(nameOfReceptionistToHire)){
+                          System.out.println("This Name is already used by another Employee");
+                          System.out.println("Enter the Name of the Receptionist You want to hire");
+                          nameOfReceptionistToHire = input.nextLine().toUpperCase().trim();
+                      }
+
+                  }
                   hospital.hireEmployee(new Receptionist(iDOfReceptionistToHire,nameOfReceptionistToHire));
                   break;
               case "5":
@@ -112,7 +147,16 @@ public class HospitalApplication {
                   int iDOfEmergencyDToHire = input.nextInt();
                   input.nextLine();
                   System.out.println("Enter the Name of the Receptionist You want to hire");
-                  String nameOfEmergencyDToHire = input.nextLine();
+                  String nameOfEmergencyDToHire = input.nextLine().trim();
+                  for(Map.Entry<String,Employee> e: hospital.getEmployeesList().entrySet()){
+                      while(e.getValue().getEmployeeName().equals(nameOfEmergencyDToHire)){
+                          System.out.println("This Name is already used by another Employee");
+                          System.out.println("Enter the Name of the Receptionist You want to hire");
+                          nameOfEmergencyDToHire = input.nextLine().toUpperCase().trim();
+                      }
+
+                  }
+
                   hospital.hireEmployee(new EmergencyDispatcher(iDOfEmergencyDToHire,nameOfEmergencyDToHire));
                   break;
               case "6":
@@ -120,31 +164,41 @@ public class HospitalApplication {
                   int iDOfNewPatient = input.nextInt();
                   input.nextLine();
                   System.out.println("Enter the Name of the new Patient");
-                  String nameOfNewPatient = input.nextLine();
+
+                  String nameOfNewPatient = input.nextLine().toUpperCase().trim();
+
+                  for(Map.Entry<String,Patient> e: hospital.getPatientsList().entrySet()){
+                      while(e.getValue().getPatientName().equals(nameOfNewPatient)){
+                          System.out.println("This Name is already used by another Patient");
+                          System.out.println("Enter the Name of the Patient You want to admit");
+                         nameOfNewPatient = input.nextLine().toUpperCase().trim();
+                      }
+
+                  }
                   hospital.admitAPatient(new Patient(iDOfNewPatient,nameOfNewPatient));
                   break;
               case "7":
                   System.out.println("Enter the Name of the Employee you want to fire");
-                  String nameOfEmployeeToFire = input.nextLine();
+                  String nameOfEmployeeToFire = input.nextLine().toUpperCase().trim();
                   hospital.fireEmployee(nameOfEmployeeToFire);
                   break;
               case "8":
                   System.out.println("Please Give the Name of the Janitor \n and have him/her clean the hospital");
-                  String janitorNme = input.nextLine();
-                  if(hospital.getEmployeesList().containsKey(janitorNme)&&hospital.getEmployeesList().get(janitorNme) instanceof Janitor){
-                      ((Janitor) hospital.getEmployeesList().get(janitorNme)).sweep(hospital);
-                  }else if(hospital.getEmployeesList().containsKey(janitorNme)&& !(hospital.getEmployeesList().get(janitorNme) instanceof Janitor)){
-                      System.out.println(janitorNme+ " is not a Janitor");
+                  String janitorName = input.nextLine().toUpperCase().trim();
+                  if(hospital.getEmployeesList().containsKey(janitorName)&&hospital.getEmployeesList().get(janitorName) instanceof Janitor){
+                      ((Janitor) hospital.getEmployeesList().get(janitorName)).sweep(hospital);
+                  }else if(hospital.getEmployeesList().containsKey(janitorName)&& !(hospital.getEmployeesList().get(janitorName) instanceof Janitor)){
+                      System.out.println(janitorName+ " is not a Janitor");
                   }else{
-                      System.out.println(janitorNme +" is not a member of the Staff");
+                      System.out.println(janitorName +" is not a member of the Staff");
                   }
                   break;
 
               case "9":
                   System.out.println("Please enter the name of the Doctor,Nurse, \n or Emergency Dispatcher who will perform the blood drawing");
-                  String nameOfBloodDrawer = input.nextLine();
+                  String nameOfBloodDrawer = input.nextLine().toUpperCase().trim();
                   System.out.println("Please enter the name of the Patient, \n who will undergo the blood Draw");
-                  String nameOfPatientToDraw = input.nextLine();
+                  String nameOfPatientToDraw = input.nextLine().toUpperCase().trim();
                   if(hospital.getEmployeesList().get(nameOfBloodDrawer) instanceof CanDrawBloodAndCare && hospital.getPatientsList().get(nameOfPatientToDraw) != null){
                       ((CanDrawBloodAndCare) hospital.getEmployeesList().get(nameOfBloodDrawer)).drawBlood(hospital.getPatientsList().get(nameOfPatientToDraw));
                   }else {
@@ -153,9 +207,9 @@ public class HospitalApplication {
                   break;
               case "10":
                   System.out.println("Please enter the name of the Doctor,Nurse, \n or Emergency Dispatcher who will care for the Patient");
-                  String nameOfCareTaker = input.nextLine();
+                  String nameOfCareTaker = input.nextLine().toUpperCase().trim();
                   System.out.println("Please enter the name of the Patient, \n who will be treated");
-                  String nameOfPatientToTreat = input.nextLine();
+                  String nameOfPatientToTreat = input.nextLine().toUpperCase().trim();
                   if(hospital.getEmployeesList().get(nameOfCareTaker) instanceof CanDrawBloodAndCare && hospital.getPatientsList().get(nameOfPatientToTreat) != null){
                       ((CanDrawBloodAndCare) hospital.getEmployeesList().get(nameOfCareTaker)).careForPatient(hospital.getPatientsList().get(nameOfPatientToTreat));
                   }else {
@@ -165,7 +219,7 @@ public class HospitalApplication {
                   break;
               case "11":
                   System.out.println("Please Give the Name of the Receptionist \n and let him/her know that there is some Guests");
-                  String recep = input.nextLine();
+                  String recep = input.nextLine().toUpperCase().trim();
                   if(hospital.getEmployeesList().containsKey(recep)&&hospital.getEmployeesList().get(recep) instanceof Receptionist){
                       ((Receptionist) hospital.getEmployeesList().get(recep)).provideInformationToGuests(hospital);
                   }else if(hospital.getEmployeesList().containsKey(recep)&& !(hospital.getEmployeesList().get(recep) instanceof Receptionist)){
@@ -179,9 +233,11 @@ public class HospitalApplication {
                   break;
               case "13":
                   hospital.displayAllEmployees();
+
                   break;
               case "14":
                   hospital.displayHospitalStatus();
+                  hospital.tickAll();
                   break;
               case "15":
                   System.out.println("Enter the amount you want to pay");
@@ -193,7 +249,7 @@ public class HospitalApplication {
                   break;
               case "17":
                   System.out.println("Enter the name of the Employee you want to search");
-                  String nameOfEmployeeToSearch= input.nextLine();
+                  String nameOfEmployeeToSearch= input.nextLine().toUpperCase().trim();
                   hospital.searchForAnEmployee(nameOfEmployeeToSearch);
                   break;
               case "18":

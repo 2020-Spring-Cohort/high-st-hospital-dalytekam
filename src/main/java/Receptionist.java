@@ -15,12 +15,23 @@ public class Receptionist extends Employee implements ITick  {
     }
 
     public void haveACall(){
-this.setOnCall(true);
+
+        this.setOnCall(true);
     }
     public void provideInformationToGuests(Hospital h){
+if(h.getNumberOfGuests()>0){
+    h.setNumberOfGuests(h.getNumberOfGuests()-2);
+    if(h.getNumberOfGuests()<0){
+        h.setNumberOfGuests(0);
+    }
+    System.out.println("The Receptionist "+getEmployeeName()+" has oriented the Guests");
+}else if(h.getNumberOfGuests()==0){
 
-        h.setNumberOfGuests(h.getNumberOfGuests()-2);
-        System.out.println("The Receptionist "+getEmployeeName()+" has oriented the Guests");
+    System.out.println("There is no more Guests in the Hospital, \n That is why "+ getEmployeeName()+" is chilling");
+}
+
+
+
     }
 
     @Override

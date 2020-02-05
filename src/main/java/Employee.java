@@ -6,7 +6,7 @@ public abstract class Employee {
 
   public Employee(int employeeNumber, String employeeName) {
     this.employeeNumber = employeeNumber;
-    this.employeeName = employeeName;
+    this.employeeName = employeeName.toUpperCase();
   }
 
 

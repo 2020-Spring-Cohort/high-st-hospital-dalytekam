@@ -17,7 +17,7 @@ public class Nurse extends Employee implements ITick, CanDrawBloodAndCare{
     @Override
     public void tick() {
 
-        this.numberOfPatients-=3;
+        this.numberOfPatients-=1;
     }
     public int getNumberOfPatients() {
 

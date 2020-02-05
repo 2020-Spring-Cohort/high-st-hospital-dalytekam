@@ -21,6 +21,9 @@ public class Hospital {
     }
 
     public void setNumberOfGuests(int numberOfGuests) {
+        if(numberOfGuests<0){
+            this.numberOfGuests = 0;
+        }
         this.numberOfGuests = numberOfGuests;
     }
 
@@ -155,6 +158,19 @@ if(emp.getValue() instanceof Doctor){
             System.out.println("______________________________________________________________________");
 
 
+    }
+    public void tickAll(){
+        for(Map.Entry<String,Patient> pat: getPatientsList().entrySet()){
+            pat.getValue().tick();
+        }
+        for(Map.Entry<String,Employee> e: getEmployeesList().entrySet()){
+            if(e.getValue() instanceof Nurse){
+            ((Nurse) e.getValue()).tick();} else if(e.getValue() instanceof Janitor){
+                ((Janitor) e.getValue()).tick();
+            }else if(e.getValue() instanceof Receptionist){
+                ((Receptionist) e.getValue()).tick();
+            }
+        }
     }
 
 }
